@@ -2,9 +2,9 @@
 #define LONG_HORN_SPACE LONG_HORN/2
 #define SHORT_HORN 400
 #define SHORT_HORN_SPACE SHORT_HORN/2
-#define SEQUENCE_SPACE 30000L
+#define SEQUENCE_SPACE 60000L
 #define HORN_PIN 13
-#define NUM_STARTS 2
+#define NUM_STARTS 1
 
 
 unsigned char hours = 0, minutes = 0, seconds = 0;
@@ -42,16 +42,17 @@ void tick(unsigned long duration, unsigned char num_long, unsigned char num_shor
 }
 
 void setup() {
+  unsigned char starts;
   pinMode(HORN_PIN,OUTPUT);
   Serial.begin(115200);
-  for(idx=0; idx<NUM_STARTS; ++idx) {
-    start_sequence(idx);
+  for(starts=0; starts<NUM_STARTS; ++starts) {
+    start_sequence(starts);
   }
 }
 
 void start_sequence(unsigned char start_index) {
   Serial.print(F("Start sequence #"));
-  Serial.print(start_index);
+  Serial.print(start_index+1);
   Serial.print(F(" of "));
   Serial.println(NUM_STARTS);
   Serial.println(F("3:00 to start!"));
