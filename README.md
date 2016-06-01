@@ -4,6 +4,7 @@ Creekfleet Timer
 Automated start sequencer for the Creekfleet sailing group.
 
 By default, runs the following sequence for each of the number of requested starts:
+
 | Horns | Time to start |
 | ----- | ------------- |
 | 3 long | 3:00 |
