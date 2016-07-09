@@ -3,8 +3,8 @@
 #include "common.h"
 
 void setupFlags() {
-  
-  for(int i = 0; i < FLAG_COUNT; ++i) {
+  analogWriteResolution(PWM_BITS);
+  for(uint8_t i = 0; i < FLAG_COUNT; ++i) {
     setupFlagPins(flags[0]);
   }
   
@@ -14,29 +14,28 @@ void setupFlags() {
   //TODO: move flags to correct position
 }
 
-Flag getFlag(byte position) {
+Flag getFlag(uint8_t position) {
   return flags[position];
 }
 
 void raiseFlag(Flag flag) {
   stopFlag(flag);
-  digitalWrite(flag.pins.moveUp, HIGH);
+  analogWrite(flag.pins.pwm, FLAG_UP_SPEED);
 }
 
 void lowerFlag(Flag flag) {
   stopFlag(flag);
-  digitalWrite(flag.pins.moveDown, HIGH);
+  analogWrite(flag.pins.pwm, FLAG_DOWN_SPEED);
 }
 
 void stopFlag(Flag flag) {
-  digitalWrite(flag.pins.moveUp, LOW);
-  digitalWrite(flag.pins.moveDown, LOW);
+  analogWrite(flag.pins.pwm, FLAG_STOP_SPEED);
 }
 
 void setupFlagPins(Flag flag) {
   FlagPins pins = flag.pins;
-  pinMode(pins.moveUp, OUTPUT);
-  pinMode(pins.moveDown, OUTPUT);
+  pinMode(pins.pwm, OUTPUT);
+  analogWriteFrequency(pins.pwm, PWM_FREQ);
   pinMode(pins.limitUp, INPUT);
   pinMode(pins.limitDown, INPUT);
 }

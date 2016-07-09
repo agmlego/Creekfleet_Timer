@@ -6,19 +6,20 @@
 
 Command currentCommand;
 
-byte buf[COMMAND_LENGTH];
-int bufPos=0;
+uint8_t buf[COMMAND_LENGTH];
+uint8_t bufPos=0;
 
 void setup() {
 
-  CONTROL_SERIAL.begin(9600);
-  DEBUG_SERIAL.begin(9600);
+  CONTROL_SERIAL.begin(115200);
+  DEBUG_SERIAL.begin(115200);
 
   delay(1000);
-  
   //setupFlags();
   setupHorn();
   setupCompressor();
+
+  DEBUG_SERIAL.println("Remote starting up!");
   
 
  

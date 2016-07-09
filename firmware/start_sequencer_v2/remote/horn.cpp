@@ -8,7 +8,7 @@ void setupHorn() {
   digitalWrite(HORN_PIN, LOW);
 }
 
-void soundHorn(long lengthMs) {
+void soundHorn(uint16_t lengthMs) {
   digitalWrite(HORN_PIN, HIGH);
   DEBUG_SERIAL.printf("Horn: %d\n",lengthMs);
   delay(lengthMs);

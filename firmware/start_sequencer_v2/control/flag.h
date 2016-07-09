@@ -3,19 +3,23 @@
 
 #include <Arduino.h>
 
-const byte NO_FLAG = 255;
-const byte DOWN_POSITION = 1;
-const byte UP_POSITION = 2;
+const uint8_t PWM_BITS = 16;
+const uint32_t PWM_FREQ = 732422; //732.4218 Hz ideal PWM frequency for 16-bit resolution
+const uint8_t NO_FLAG = 255;
+const uint8_t DOWN_POSITION = 1;
+const uint8_t UP_POSITION = 2;
+const uint16_t FLAG_UP_SPEED = 65535;
+const uint16_t FLAG_DOWN_SPEED = 0;
+const uint16_t FLAG_STOP_SPEED = 32768;
 
 struct FlagStatus {
-  byte targetPosition;
-  bool isMoving;
+  uint8_t targetPosition;
+  boolean isMoving;
 };
 struct FlagPins {
-  byte moveUp;
-  byte moveDown;
-  byte limitUp;
-  byte limitDown;
+  uint8_t pwm;
+  uint8_t limitUp;
+  uint8_t limitDown;
 };
 struct Flag {
   FlagStatus status;
@@ -23,7 +27,7 @@ struct Flag {
 };
 
 
-Flag getFlag(byte position);
+Flag getFlag(uint8_t position);
 
 void setupFlags();
 

@@ -3,7 +3,7 @@
 #include "flag.h"
 #include <Arduino.h>
 
-byte serializeFlagCommand(byte c) {
+uint8_t serializeFlagCommand(uint8_t c) {
   if(c == NO_FLAG) {
     return 'x';
   } else {
@@ -11,11 +11,11 @@ byte serializeFlagCommand(byte c) {
   }
 }
 
-byte serializeDigit(byte c) {
+uint8_t serializeDigit(uint8_t c) {
   return c + '0';
 }
 
-byte parseFlagCommand(byte c) {
+uint8_t parseFlagCommand(uint8_t c) {
   if(c == 'x') {
     return NO_FLAG;
   } else {
@@ -23,7 +23,7 @@ byte parseFlagCommand(byte c) {
   }
 }
 
-byte parseDigit(byte c) {
+uint8_t parseDigit(uint8_t c) {
   return c - '0';
 }
 
@@ -41,13 +41,13 @@ void sendCommand(Command command) {
   printCommand(command);
   DEBUG_SERIAL.println();
   
-  byte buffer[4];
+  uint8_t buffer[4];
   buffer[0] = serializeFlagCommand(command.raiseFlagPosition);
   buffer[1] = serializeFlagCommand(command.lowerFlagPosition);
   buffer[2] = serializeDigit(command.longHornCount);
   buffer[3] = serializeDigit(command.shortHornCount);
 
-  for(int i = 0; i < COMMAND_LENGTH; ++i) {
+  for(uint8_t i = 0; i < COMMAND_LENGTH; ++i) {
     while(!CONTROL_SERIAL.availableForWrite());
     CONTROL_SERIAL.write(buffer[i]);
   }

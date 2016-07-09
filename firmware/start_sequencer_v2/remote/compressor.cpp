@@ -2,7 +2,7 @@
 #include "common.h"
 #include "Bounce.h"
 
-int switchState = 2;
+uint8_t switchState = 2;
 
 IntervalTimer debounceTimer;
 
@@ -29,7 +29,7 @@ void checkCompressor() {
 void compressorDebounce() {
   debounceTimer.end();
 
-  int newState = digitalRead(COMPRESSOR_PIN);
+  uint8_t newState = digitalRead(COMPRESSOR_PIN);
   if(switchState == newState) {
     if(switchState == LOW) {
       startCompressor();

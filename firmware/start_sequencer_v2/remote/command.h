@@ -5,17 +5,17 @@
 
 
 struct Command {
-  byte raiseFlagPosition;
-  byte lowerFlagPosition;
-  byte longHornCount;
-  byte shortHornCount;
+  uint8_t raiseFlagPosition;
+  uint8_t lowerFlagPosition;
+  uint8_t longHornCount;
+  uint8_t shortHornCount;
 };
 
-byte parseFlagCommand(byte c);
-byte parseDigit(byte c);
+uint8_t parseFlagCommand(uint8_t c);
+uint8_t parseDigit(uint8_t c);
 
 void printCommand(Command command);
 void sendCommand(Command command);
 boolean isCommandNonEmpty(Command command);
-byte serializeDigit(byte c);
-byte serializeFlagCommand(byte c);
+uint8_t serializeDigit(uint8_t c);
+uint8_t serializeFlagCommand(uint8_t c);

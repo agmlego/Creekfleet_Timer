@@ -1,8 +1,8 @@
 #include "command.h"
 #include "common.h"
 
-const byte START_BUTTON_PIN = 2;
-int startSwitchState;
+const uint8_t START_BUTTON_PIN = 2;
+uint8_t startSwitchState;
 IntervalTimer startButtonDebounceTimer;
 
 struct SequenceCommand {
@@ -10,7 +10,7 @@ struct SequenceCommand {
   Command command;
 };
 
-const int SEQUENCE_LENGTH = 13;
+const uint8_t SEQUENCE_LENGTH = 13;
 SequenceCommand sequence[] = { 
   { 00000, {NO_FLAG,NO_FLAG,3,0}},
   { 60000, {NO_FLAG,NO_FLAG,2,0}},
@@ -27,14 +27,14 @@ SequenceCommand sequence[] = {
   {180000, {NO_FLAG,NO_FLAG,1,0}},
 };
 
-int sequencePosition;
+uint8_t sequencePosition;
 uint32_t startMs;
 
 boolean sequenceRunning;
 
 void setup() {
-  DEBUG_SERIAL.begin(9600);
-  CONTROL_SERIAL.begin(9600);
+  DEBUG_SERIAL.begin(115200);
+  CONTROL_SERIAL.begin(115200);
   delay(1000);
 
   startSwitchState = 2;
@@ -68,7 +68,7 @@ void checkStartButton() {
 void startButtonDebounce() {
   startButtonDebounceTimer.end();
 
-  int newState = digitalRead(START_BUTTON_PIN );
+  uint8_t newState = digitalRead(START_BUTTON_PIN );
   if(startSwitchState == newState) {
     if(startSwitchState == HIGH) {
       if(!sequenceRunning){
