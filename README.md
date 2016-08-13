@@ -45,3 +45,20 @@ By default, runs the following sequence for each of the number of requested star
 | Flag4.PWM     | D9          |
 | Flag4.UP      | D20 (irq)   |
 | Flag4.DOWN    | D21 (irq)   |
+
+#### Remote Connectors
+
+##### Flag 0
+<img src="hardware/connectors/remote_flag0_connector.svg" />
+
+##### Flag 1
+<img src="hardware/connectors/remote_flag1_connector.svg" />
+
+##### Flag 2
+<img src="hardware/connectors/remote_flag2_connector.svg" />
+
+##### Flag 3
+<img src="hardware/connectors/remote_flag3_connector.svg" />
+
+##### Flag 4
+<img src="hardware/connectors/remote_flag4_connector.svg" />
