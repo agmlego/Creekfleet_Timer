@@ -49,16 +49,16 @@ By default, runs the following sequence for each of the number of requested star
 #### Remote Connectors
 
 ##### Flag 0
-<img src="hardware/connectors/remote_flag0_connector.svg" />
+<a><img src="https://cdn.rawgit.com/agmlego/Creekfleet_Timer/master/hardware/connectors/remote_flag0_connector.svg" /></a>
 
 ##### Flag 1
-<img src="hardware/connectors/remote_flag1_connector.svg" />
+<a><img src="https://cdn.rawgit.com/agmlego/Creekfleet_Timer/master/hardware/connectors/remote_flag1_connector.svg" /></a>
 
 ##### Flag 2
-<img src="hardware/connectors/remote_flag2_connector.svg" />
+<a><img src="https://cdn.rawgit.com/agmlego/Creekfleet_Timer/master/hardware/connectors/remote_flag2_connector.svg" /></a>
 
 ##### Flag 3
-<img src="hardware/connectors/remote_flag3_connector.svg" />
+<a><img src="https://cdn.rawgit.com/agmlego/Creekfleet_Timer/master/hardware/connectors/remote_flag3_connector.svg" /></a>
 
 ##### Flag 4
-<img src="hardware/connectors/remote_flag4_connector.svg" />
+<a><img src="https://cdn.rawgit.com/agmlego/Creekfleet_Timer/master/hardware/connectors/remote_flag4_connector.svg" /></a>
