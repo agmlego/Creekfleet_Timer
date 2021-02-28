@@ -1,7 +1,7 @@
 Creekfleet Timer
 ================
 
-Automated start sequencer for the Creekfleet sailing group.
+Automated start sequencer for the [Creekfleet](https://creekfleet.org) sailing group.
 
 By default, runs the following sequence for each of the number of requested starts:
 
@@ -45,20 +45,3 @@ By default, runs the following sequence for each of the number of requested star
 | Flag4.PWM     | D9          |
 | Flag4.UP      | D20 (irq)   |
 | Flag4.DOWN    | D21 (irq)   |
-
-#### Remote Connectors
-
-##### Flag 0
-<a><img src="https://cdn.rawgit.com/agmlego/Creekfleet_Timer/master/hardware/connectors/remote_flag0_connector.svg" /></a>
-
-##### Flag 1
-<a><img src="https://cdn.rawgit.com/agmlego/Creekfleet_Timer/master/hardware/connectors/remote_flag1_connector.svg" /></a>
-
-##### Flag 2
-<a><img src="https://cdn.rawgit.com/agmlego/Creekfleet_Timer/master/hardware/connectors/remote_flag2_connector.svg" /></a>
-
-##### Flag 3
-<a><img src="https://cdn.rawgit.com/agmlego/Creekfleet_Timer/master/hardware/connectors/remote_flag3_connector.svg" /></a>
-
-##### Flag 4
-<a><img src="https://cdn.rawgit.com/agmlego/Creekfleet_Timer/master/hardware/connectors/remote_flag4_connector.svg" /></a>

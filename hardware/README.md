@@ -1,4 +1,4 @@
 Creekfleet Timer Hardware
 =========================
 
-EAGLE design files, box CAD files.
+EAGLE design files, case CAD files.
