@@ -23,25 +23,31 @@ By default, runs the following sequence for each of the number of requested star
 
 ## Pins
 
-### Remote
-
-| Function      | Arduino Pin |
-| ------------- | ----------- |
-| Horn          | D13         |
-| Compressor    | D14         |
-| Pressure Gauge| D2 (A0 soon)|
-| Flag0.PWM     | D3          |
-| Flag0.UP      | D7  (irq)   |
-| Flag0.DOWN    | D8  (irq)   |
-| Flag1.PWM     | D4          |
-| Flag1.UP      | D11 (irq)   |
-| Flag1.DOWN    | D12 (irq)   |
-| Flag2.PWM     | D5          |
-| Flag2.UP      | D16 (irq)   |
-| Flag2.DOWN    | D17 (irq)   |
-| Flag3.PWM     | D6          |
-| Flag3.UP      | D18 (irq)   |
-| Flag3.DOWN    | D19 (irq)   |
-| Flag4.PWM     | D9          |
-| Flag4.UP      | D20 (irq)   |
-| Flag4.DOWN    | D21 (irq)   |
+| Function      | Arduino Pin          |
+| ------------- | -------------------- |
+| Horn          | D12                  |
+| Compressor    | D11                  |
+| Pressure Gauge| D35 (A16)            |
+| UP.LED        | D24                  |
+| UP.Switch     | D25 (irq, active low)|
+| DOWN.LED      | D26                  |
+| DOWN.Switch   | D27 (irq, active low)|
+| SELECT.LED    | D28                  |
+| SELECT.Switch | D29 (irq, active low)|
+| BACK.LED      | D30                  |
+| BACK.Switch   | D31 (irq, active low)|
+| LCD.VO        | A22 (DAC1)           |
+| LCD.RS        | D13                  |
+| LCD.RW        | D14                  |
+| LCD.E         | D15                  |
+| LCD.DB0       | D16                  |
+| LCD.DB1       | D17                  |
+| LCD.DB2       | D18                  |
+| LCD.DB3       | D19                  |
+| LCD.DB4       | D20                  |
+| LCD.DB5       | D21                  |
+| LCD.DB6       | D22                  |
+| LCD.DB7       | D23                  |
+| LCD.Red BL    | D36 (PWM)            |
+| LCD.Green BL  | D38 (PWM)            |
+| LCD.Blue BL   | D37 (PWM)            |
