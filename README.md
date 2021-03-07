@@ -29,13 +29,13 @@ By default, runs the following sequence for each of the number of requested star
 | Compressor    | D11                  |
 | Pressure Gauge| D35 (A16)            |
 | UP.LED        | D24                  |
-| UP.Switch     | D25 (irq, active low)|
+| UP.Switch     | D25 (active low)     |
 | DOWN.LED      | D26                  |
-| DOWN.Switch   | D27 (irq, active low)|
+| DOWN.Switch   | D27 (active low)     |
 | SELECT.LED    | D28                  |
-| SELECT.Switch | D29 (irq, active low)|
+| SELECT.Switch | D29 (active low)     |
 | BACK.LED      | D30                  |
-| BACK.Switch   | D31 (irq, active low)|
+| BACK.Switch   | D31 (active low)     |
 | LCD.VO        | A22 (DAC1)           |
 | LCD.RS        | D13                  |
 | LCD.RW        | D14                  |
