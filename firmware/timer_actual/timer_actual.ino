@@ -107,7 +107,22 @@ void update_compressor(){
   }
 }
 
+char[] get_iso_time(length){
+  char time_buf[length];
+  sprintf(time_buf,"%04d-%02d-%02d %02d:%02d:%02d",
+    year(),
+    month(),
+    day(),
+    hour(),
+    minute(),
+    second()
+  );
+  return time_buf;
+}
+
 void loop() {
   update_buttons();
   update_compressor();
+  lcd.setCursor(0,3);
+  lcd.print(get_iso_time());
 }
