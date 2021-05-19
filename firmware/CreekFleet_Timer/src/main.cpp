@@ -58,7 +58,7 @@ void setup()
           VERSION);
   lcd.begin(20, 4);
   lcd.print(SPLASH);
-  lcd_bl.setColor(COLOR::BLUE);
+  lcd_bl.setRGBColor(255,0,0);
   Serial.println(SPLASH);
 
   // Set pin modes
@@ -68,9 +68,6 @@ void setup()
   pinMode(DOWN_LED, OUTPUT);
   pinMode(SELECT_LED, OUTPUT);
   pinMode(BACK_LED, OUTPUT);
-  pinMode(LCD_BL_RED, OUTPUT);
-  pinMode(LCD_BL_GREEN, OUTPUT);
-  pinMode(LCD_BL_BLUE, OUTPUT);
   Serial.println("Pins configured!");
   upButton.attach(UP_SWITCH, INPUT_PULLUP);
   upButton.interval(DEBOUNCE);
@@ -86,6 +83,23 @@ void setup()
   backButton.setPressedState(LOW);
   Serial.println("Buttons configured!");
 
+  digitalWrite(UP_LED, HIGH);
+  delay(250);
+  digitalWrite(DOWN_LED, HIGH);
+  delay(250);
+  digitalWrite(BACK_LED, HIGH);
+  delay(250);
+  digitalWrite(SELECT_LED, HIGH);
+  delay(250);
+  digitalWrite(UP_LED, LOW);
+  delay(250);
+  digitalWrite(DOWN_LED, LOW);
+  delay(250);
+  digitalWrite(BACK_LED, LOW);
+  delay(250);
+  digitalWrite(SELECT_LED, LOW);
+  delay(250);
+
   // Set up time
   setSyncProvider(Teensy3Clock.get);
   if (timeStatus() != timeSet)
@@ -96,7 +110,7 @@ void setup()
   }
   else
   {
-    Serial.printf("Got good time! %s",get_iso_time());
+    Serial.printf("Got good time! %s\n",get_iso_time());
   }
 }
 
