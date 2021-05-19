@@ -17,3 +17,7 @@
 *.s#8
 *.s#9
 OldVersions/
+.pio
+.pioenvs
+.piolibdeps
+.vscode

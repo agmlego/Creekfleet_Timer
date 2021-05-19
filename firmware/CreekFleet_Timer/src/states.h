@@ -1,0 +1,4 @@
+enum STATE {
+    IDLE,
+    SEQUENCE
+};
