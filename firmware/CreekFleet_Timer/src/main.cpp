@@ -13,6 +13,7 @@
 // Display constants
 const char VERSION[] PROGMEM = "1.0.0";
 char SPLASH[81] PROGMEM;
+char TIME_BUF[20];
 const uint8_t CONTRAST = 64; // 25% constrast voltage
 
 //UI constants
@@ -25,23 +26,21 @@ bool COMP_STATE = false;
 
 //UI objects
 LiquidCrystal lcd(LCD_RS, LCD_RW, LCD_E, LCD_DB0, LCD_DB1, LCD_DB2, LCD_DB3, LCD_DB4, LCD_DB5, LCD_DB6, LCD_DB7);
-RARGBLED lcd_bl(LCD_BL_RED, LCD_BL_GREEN, LCD_BL_BLUE, CommonCathode);
+RARGBLED lcd_bl(LCD_BL_RED, LCD_BL_GREEN, LCD_BL_BLUE, CommonAnode);
 Bounce2::Button upButton = Bounce2::Button();
 Bounce2::Button downButton = Bounce2::Button();
 Bounce2::Button selectButton = Bounce2::Button();
 Bounce2::Button backButton = Bounce2::Button();
 
-char* get_iso_time()
+void get_iso_time()
 {
-  char time_buf[20];
-  sprintf(time_buf, "%04d-%02d-%02d %02d:%02d:%02d",
+  sprintf(TIME_BUF, "%04d-%02d-%02d %02d:%02d:%02d",
           year(),
           month(),
           day(),
           hour(),
           minute(),
           second());
-  return time_buf;
 }
 
 void setup()
@@ -58,7 +57,7 @@ void setup()
           VERSION);
   lcd.begin(20, 4);
   lcd.print(SPLASH);
-  lcd_bl.setRGBColor(255,0,0);
+  lcd_bl.setColor(COLOR::RED);
   Serial.println(SPLASH);
 
   // Set pin modes
@@ -110,8 +109,10 @@ void setup()
   }
   else
   {
-    Serial.printf("Got good time! %s\n",get_iso_time());
+    get_iso_time();
+    Serial.printf("Got good time! %s\n",TIME_BUF);
   }
+  lcd.clear();
 }
 
 void update_buttons()
@@ -188,5 +189,6 @@ void loop()
   update_buttons();
   update_compressor();
   lcd.setCursor(0, 3);
-  lcd.print(get_iso_time());
+  get_iso_time();
+  lcd.print(TIME_BUF);
 }
