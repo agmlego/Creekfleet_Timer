@@ -1,5 +1,5 @@
-uint8_t NUM_HORNS = 44;
-uint64_t HORN_TIMES[] = {
+uint8_t CREEKFLEET_NUM_HORNS = 44;
+uint64_t CREEKFLEET_HORN_TIMES[] = {
 	0,
 	750,
 	1125,
@@ -45,7 +45,7 @@ uint64_t HORN_TIMES[] = {
 	180000,
 	180750
 };
-bool HORN_COMMANDS[] = {
+bool CREEKFLEET_HORN_COMMANDS[] = {
 	true,
 	false,
 	true,
@@ -82,6 +82,27 @@ bool HORN_COMMANDS[] = {
 	false,
 	true,
 	false,
+	true,
+	false,
+	true,
+	false,
+	true,
+	false,
+	true,
+	false
+};
+uint8_t ISAF_NUM_HORNS = 8;
+uint64_t ISAF_HORN_TIMES[] = {
+	0,
+	400,
+	60000,
+	60400,
+	240000,
+	240750,
+	300000,
+	300400
+};
+bool ISAF_HORN_COMMANDS[] = {
 	true,
 	false,
 	true,
