@@ -37,6 +37,7 @@ Bounce2::Button backButton = Bounce2::Button();
 // Control objects
 STATE programState = STATE::IDLE;
 SEQUENCES sequence = SEQUENCES::CREEKFLEET;
+bool latch = true;
 uint8_t hornIndex = 0;
 Chrono hornChrono;
 
@@ -214,6 +215,7 @@ void update_buttons()
       else if (programState == STATE::SEQUENCE)
       {
         programState = STATE::IDLE;
+        latch=true;
       }
     }
     else
@@ -325,24 +327,27 @@ void loop()
     update_horn();
     break;
   case STATE::IDLE:
-    lcd_bl.setColor(COLOR::BLUE);
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print(F("Press ENTER to start"));
-    lcd.setCursor(0, 1);
-    lcd.print(F("   race sequence    "));
-    lcd.setCursor(0, 2);
-    switch (sequence)
-    {
-    case SEQUENCES::CREEKFLEET:
-      lcd.print(F("   [CreekFleet]     "));
-      break;
-    case SEQUENCES::ISAF:
-      lcd.print(F("      [ISAF]        "));
-      break;
-    default:
-      lcd.print(F("   BAD SEQUENCE     "));
-      break;
+    if(latch){
+      latch = false;
+      lcd_bl.setColor(COLOR::BLUE);
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print(F("Press ENTER to start"));
+      lcd.setCursor(0, 1);
+      lcd.print(F("   race sequence    "));
+      lcd.setCursor(0, 2);
+      switch (sequence)
+      {
+      case SEQUENCES::CREEKFLEET:
+        lcd.print(F("   [CreekFleet]     "));
+        break;
+      case SEQUENCES::ISAF:
+        lcd.print(F("      [ISAF]        "));
+        break;
+      default:
+        lcd.print(F("   BAD SEQUENCE     "));
+        break;
+      }
     }
     break;
   }
