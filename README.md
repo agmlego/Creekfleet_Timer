@@ -21,6 +21,15 @@ By default, runs the following sequence for each of the number of requested star
 | 1 short           | 0:01          |
 | 1 long            | START         |
 
+Also has a mode selectable during idle operation for the ISAF Rule 26 start:
+
+| Horns             | Time to start |
+| ----------------- | ------------- |
+| 1 short           | 5:00          |
+| 1 short           | 4:00          |
+| 1 long            | 1:00          |
+| 1 short           | START         |
+
 ## Pins
 
 | Function      | Arduino Pin          |

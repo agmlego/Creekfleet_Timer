@@ -36,6 +36,7 @@ Bounce2::Button backButton = Bounce2::Button();
 
 // Control objects
 STATE programState = STATE::IDLE;
+SEQUENCES sequence = SEQUENCES::CREEKFLEET;
 uint8_t hornIndex = 0;
 Chrono hornChrono;
 
@@ -124,11 +125,6 @@ void setup()
     get_iso_time();
     Serial.printf("Got good time! %s\n", TIME_BUF);
   }
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print(F("Press ENTER to start"));
-  lcd.setCursor(0, 1);
-  lcd.print(F("   race sequence    "));
 }
 
 void update_buttons()
@@ -139,6 +135,21 @@ void update_buttons()
     {
       digitalWrite(UP_LED, HIGH);
       Serial.println("UP pressed");
+      if (programState == STATE::IDLE)
+      {
+        lcd.setCursor(0, 2);
+        switch (sequence)
+        {
+        case SEQUENCES::CREEKFLEET:
+          sequence = SEQUENCES::ISAF;
+          lcd.print(F("      [ISAF]        "));
+          break;
+        case SEQUENCES::ISAF:
+          sequence = SEQUENCES::CREEKFLEET;
+          lcd.print(F("   [CreekFleet]     "));
+          break;
+        }
+      }
     }
     else
     {
@@ -151,6 +162,21 @@ void update_buttons()
     {
       digitalWrite(DOWN_LED, HIGH);
       Serial.println("DOWN pressed");
+      if (programState == STATE::IDLE)
+      {
+        lcd.setCursor(0, 2);
+        switch (sequence)
+        {
+        case SEQUENCES::CREEKFLEET:
+          sequence = SEQUENCES::ISAF;
+          lcd.print(F("      [ISAF]        "));
+          break;
+        case SEQUENCES::ISAF:
+          sequence = SEQUENCES::CREEKFLEET;
+          lcd.print(F("   [CreekFleet]     "));
+          break;
+        }
+      }
     }
     else
     {
@@ -173,17 +199,21 @@ void update_buttons()
         lcd.print(F(" Starting sequence! "));
         lcd.setCursor(0, 1);
         lcd.print(F("Press ENTER to stop "));
+        lcd.setCursor(0, 2);
+        switch (sequence)
+        {
+        case SEQUENCES::CREEKFLEET:
+          lcd.print(F("   [CreekFleet]     "));
+          break;
+        case SEQUENCES::ISAF:
+          lcd.print(F("      [ISAF]        "));
+          break;
+        }
         hornChrono.restart();
       }
       else if (programState == STATE::SEQUENCE)
       {
         programState = STATE::IDLE;
-        lcd.clear();
-        lcd_bl.setColor(COLOR::BLUE);
-        lcd.setCursor(0, 0);
-        lcd.print(F("Press ENTER to start"));
-        lcd.setCursor(0, 1);
-        lcd.print(F("   race sequence    "));
       }
     }
     else
@@ -224,35 +254,61 @@ void update_compressor()
 
 void update_horn()
 {
-  if (hornChrono.hasPassed(HORN_TIMES[hornIndex]))
+  switch (sequence)
   {
-    Serial.print("Turning horn ");
-    if (HORN_COMMANDS[hornIndex])
+  case SEQUENCES::CREEKFLEET:
+    if (hornChrono.hasPassed(CREEKFLEET_HORN_TIMES[hornIndex]))
     {
-      Serial.print("ON");
+      Serial.print("Turning horn ");
+      if (CREEKFLEET_HORN_COMMANDS[hornIndex])
+      {
+        Serial.print("ON");
+      }
+      else
+      {
+        Serial.print("OFF");
+      }
+      Serial.printf(" at %d\n", CREEKFLEET_HORN_TIMES[hornIndex]);
+      digitalWrite(HORN, CREEKFLEET_HORN_COMMANDS[hornIndex]);
+      ++hornIndex;
     }
-    else
+    if (hornIndex > CREEKFLEET_NUM_HORNS)
     {
-      Serial.print("OFF");
+      Serial.println("START!");
+      lcd.clear();
+      lcd.setCursor(0, 2);
+      lcd.write(F("       START!       "));
+      cycle_buttons();
+      programState = STATE::IDLE;
     }
-    Serial.printf(" at %d\n", HORN_TIMES[hornIndex]);
-    digitalWrite(HORN, HORN_COMMANDS[hornIndex]);
-    ++hornIndex;
-  }
-  if (hornIndex > NUM_HORNS)
-  {
-    Serial.println("START!");
-    lcd.clear();
-    lcd.setCursor(0, 2);
-    lcd.write(F("       START!       "));
-    cycle_buttons();
-    programState = STATE::IDLE;
-    lcd.clear();
-    lcd_bl.setColor(COLOR::BLUE);
-    lcd.setCursor(0, 0);
-    lcd.print(F("Press ENTER to start"));
-    lcd.setCursor(0, 1);
-    lcd.print(F("   race sequence    "));
+    break;
+
+  case SEQUENCES::ISAF:
+    if (hornChrono.hasPassed(ISAF_HORN_TIMES[hornIndex]))
+    {
+      Serial.print("Turning horn ");
+      if (ISAF_HORN_COMMANDS[hornIndex])
+      {
+        Serial.print("ON");
+      }
+      else
+      {
+        Serial.print("OFF");
+      }
+      Serial.printf(" at %d\n", ISAF_HORN_TIMES[hornIndex]);
+      digitalWrite(HORN, ISAF_HORN_COMMANDS[hornIndex]);
+      ++hornIndex;
+    }
+    if (hornIndex > ISAF_NUM_HORNS)
+    {
+      Serial.println("START!");
+      lcd.clear();
+      lcd.setCursor(0, 2);
+      lcd.write(F("       START!       "));
+      cycle_buttons();
+      programState = STATE::IDLE;
+    }
+    break;
   }
 }
 
@@ -269,6 +325,25 @@ void loop()
     update_horn();
     break;
   case STATE::IDLE:
+    lcd_bl.setColor(COLOR::BLUE);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(F("Press ENTER to start"));
+    lcd.setCursor(0, 1);
+    lcd.print(F("   race sequence    "));
+    lcd.setCursor(0, 2);
+    switch (sequence)
+    {
+    case SEQUENCES::CREEKFLEET:
+      lcd.print(F("   [CreekFleet]     "));
+      break;
+    case SEQUENCES::ISAF:
+      lcd.print(F("      [ISAF]        "));
+      break;
+    default:
+      lcd.print(F("   BAD SEQUENCE     "));
+      break;
+    }
     break;
   }
 }
