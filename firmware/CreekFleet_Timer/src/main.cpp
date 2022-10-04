@@ -18,15 +18,15 @@ char SPLASH[81] PROGMEM;
 char TIME_BUF[20];
 const uint8_t CONTRAST = 64; // 25% contrast voltage
 
-//UI constants
+// UI constants
 const uint8_t DEBOUNCE = 10; // ms of debounce
 
-//Compressor constants
+// Compressor constants
 const uint16_t HIGH_PRESSURE = 768;
 const uint16_t LOW_PRESSURE = HIGH_PRESSURE - 128;
 bool COMP_STATE = false;
 
-//UI objects
+// UI objects
 LiquidCrystal lcd(LCD_RS, LCD_RW, LCD_E, LCD_DB0, LCD_DB1, LCD_DB2, LCD_DB3, LCD_DB4, LCD_DB5, LCD_DB6, LCD_DB7);
 RARGBLED lcd_bl(LCD_BL_RED, LCD_BL_GREEN, LCD_BL_BLUE, CommonCathode);
 Bounce2::Button upButton = Bounce2::Button();
@@ -215,7 +215,7 @@ void update_buttons()
       else if (programState == STATE::SEQUENCE)
       {
         programState = STATE::IDLE;
-        latch=true;
+        latch = true;
       }
     }
     else
@@ -261,7 +261,7 @@ void update_horn()
   case SEQUENCES::CREEKFLEET:
     if (hornChrono.hasPassed(CREEKFLEET_HORN_TIMES[hornIndex]))
     {
-      Serial.print("Turning horn ");
+      Serial.printf("[%d] Turning horn ", hornIndex);
       if (CREEKFLEET_HORN_COMMANDS[hornIndex])
       {
         Serial.print("ON");
@@ -274,7 +274,7 @@ void update_horn()
       digitalWrite(HORN, CREEKFLEET_HORN_COMMANDS[hornIndex]);
       ++hornIndex;
     }
-    if (hornIndex > CREEKFLEET_NUM_HORNS)
+    if (hornIndex >= CREEKFLEET_NUM_HORNS)
     {
       Serial.println("START!");
       lcd.clear();
@@ -288,7 +288,7 @@ void update_horn()
   case SEQUENCES::ISAF:
     if (hornChrono.hasPassed(ISAF_HORN_TIMES[hornIndex]))
     {
-      Serial.print("Turning horn ");
+      Serial.printf("[%d] Turning horn ", hornIndex);
       if (ISAF_HORN_COMMANDS[hornIndex])
       {
         Serial.print("ON");
@@ -301,7 +301,7 @@ void update_horn()
       digitalWrite(HORN, ISAF_HORN_COMMANDS[hornIndex]);
       ++hornIndex;
     }
-    if (hornIndex > ISAF_NUM_HORNS)
+    if (hornIndex >= ISAF_NUM_HORNS)
     {
       Serial.println("START!");
       lcd.clear();
@@ -327,7 +327,8 @@ void loop()
     update_horn();
     break;
   case STATE::IDLE:
-    if(latch){
+    if (latch)
+    {
       latch = false;
       lcd_bl.setColor(COLOR::BLUE);
       lcd.clear();
